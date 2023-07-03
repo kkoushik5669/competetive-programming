@@ -15,6 +15,36 @@ RECURSIONS codes to remember:-
 12.palindrome portioning
 13.kth permutation sequence
 14.rat in a mazeac
+-----------------------------------------------------------------------------------------------------------------------------------------------
+1.big integer 
+2.lcm,gcd,Euclidean algorithm,extended Euclidean algorithm 
+3.sieves eratosthenes 
+4.modulo arithmetic modulo exponentiation modulo inverse 
+5.lucas theorem 
+6.chinese remainder theorem 
+7.series and subsequences
+8.catalan number 
+9.pigeonhole principle 
+10.inclusion exclusion principle
+------------------------------------------------------------------------------------------------------------------------------------------------
+Number Theory - Sieve, primality test, fibonacci etc
+Linear Algebra - Basic Matrices, multiplication, etc
+Basic Algebra - Solving linear equations, finding unknown, etc
+Statistics - Mean, Median, Variance, expected value
+Basic Arithmetic concepts like mixtures, progressions, ratios, rational numbers, hcf / lcm etc.
+Probability - Bayes' theorem, Probability distribution, etc
+Co-ordinate Geometry - 2D, 3D space, distance between points, line equation, etc
+Discrete Mathematics and Combinatorics - Arrangements, sorting, permutations
+Principles like Pigeon Hole, Inclusion-Exclusion, Induction etc
+That is just for starting. Once you are comfortable with competitive programming you can learn following advance topics :
+
+Graph Theory - Path, Node, Colouring, Matching, Components, Flow, etc
+Calculus - Variable Minimisation, Maximisation
+Error Analysis and Estimation. This is important for only few tricky probs
+Game Theory - Nim Game, Grundy Number, etc.
+Fast Fourier Tranformation
+Modular Arithmetic
+----------------------------------------------------------------------------------------------------------------------------
 Algebra
 Fundamentals
 Binary Exponentiation
