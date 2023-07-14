@@ -5,3 +5,4 @@
 3.auto it=vec.begin()+1;
     auto it2=vec.begin()+3;
     vec.erase(it,it2);
+4.using dsu to find if a graph has cycle in it.
