@@ -7,3 +7,5 @@
     vec.erase(it,it2);
 4.using dsu to find if a graph has cycle in it.
 5.use 1ll<<34 instead of 1<<34.
+Things to do:
+1.learning various string algorithms.
