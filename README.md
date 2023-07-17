@@ -9,5 +9,6 @@
 5.use 1ll<<34 instead of 1<<34.
 6.partial_sum(a,a+5,b)
 7.partial_sum(a,a+5,b,myfun);
+8.maximum prime gap donot excced 300.
 Things to do:
 1.learning various string algorithms.
