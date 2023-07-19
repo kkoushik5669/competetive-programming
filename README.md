@@ -10,6 +10,7 @@
 6.partial_sum(a,a+5,b)
 7.partial_sum(a,a+5,b,myfun);
 8.__lg(n) .
-8.maximum prime gap donot excced 300.
+9.maximum prime gap donot excced 300.
+10.string(c[i],codeforces[i]);
 Things to do:
 1.learning various string algorithms.
