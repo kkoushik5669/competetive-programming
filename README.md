@@ -12,5 +12,6 @@
 8.__lg(n) .
 9.maximum prime gap donot excced 300.
 10.string(c[i],codeforces[i]);
+11.cirucular problems intuition- k%n;modulo n is the main part here.
 Things to do:
 1.learning various string algorithms.
