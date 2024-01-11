@@ -1,21 +1,32 @@
-priority_queue<iPair, vector<iPair>, greater<iPair> >
-        pq;
-    vector<int> dist(V, 1e18);
+const int INF = 1000000000;
+vector<vector<pair<int, int>>> adj;
 
-    pq.push(make_pair(0, src));
-    dist[src] = 0;
+void dijkstra(int s, vector<int> & d, vector<int> & p) {
+    //use vector p to restore the shortest path
+    int n = adj.size();
+    d.assign(n, INF);
+    p.assign(n, -1);
 
-    while (!pq.empty()) {
+    d[s] = 0;
+    using pii = pair<int, int>;
+    priority_queue<pii, vector<pii>, greater<pii>> q;
+    q.push({0, s});
+    while (!q.empty()) {
+        int v = q.top().second;
+        int d_v = q.top().first;
+        q.pop();
+        if (d_v != d[v])
+            continue;
 
-        int u = pq.top().second;
-        pq.pop();
-        list<pair<int, int> >::iterator i;
-        for (i = adj[u].begin(); i != adj[u].end(); ++i) {
-            int v = (*i).first;
-            int weight = (*i).second;
-            if (dist[v] > dist[u] + weight) {
-                dist[v] = dist[u] + weight;
-                pq.push(make_pair(dist[v], v));
+        for (auto edge : adj[v]) {
+            int to = edge.first;
+            int len = edge.second;
+
+            if (d[v] + len < d[to]) {
+                d[to] = d[v] + len;
+                p[to] = v;
+                q.push({d[to], to});
             }
         }
     }
+}
