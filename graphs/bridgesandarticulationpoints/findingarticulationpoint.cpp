@@ -14,6 +14,7 @@ void dfs(int v, int p = -1) {
             dfs(to, v);
             low[v] = min(low[v], low[to]);
             if (low[to] >= tin[v] && p!=-1)
+//the lowest time to reach the vertex "to" is greater than the discovery time to reach v
                 IS_CUTPOINT(v);
             ++children;
         }
