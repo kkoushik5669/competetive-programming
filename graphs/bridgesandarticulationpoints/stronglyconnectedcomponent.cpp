@@ -1,7 +1,12 @@
 vector<vector<int>> adj, adj_rev;
 vector<bool> used;
 vector<int> order, component;
-
+//What is a condensed graph?? It is formed by making a graph from different strongly connected components
+//What is the root of a condensed graph .It is the one scc which has the maximum tout
+//for each scc the one with the maximum tout is where we need to apply dfs from
+//how to optimally find the nodes for maximum tout just find the topo sort brooo
+//It can be proved that applying the dfs on a straight graph and a reverse graph would give you the same scc
+//It is optimal to apply dfs on reverse graph because it will not visit other useless scc's .
 void dfs1(int v) {
     used[v] = true;
 
