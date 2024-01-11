@@ -16,6 +16,7 @@ void dfs(int v, int p = -1) {
             dfs(to, v);
             low[v] = min(low[v], low[to]);
             if (low[to] > tin[v])
+                //if lowest time to reach "to" is greater than the discovery time to reach vertex v then it means that the edge is a bridge
                 IS_BRIDGE(v, to);
         }
     }
