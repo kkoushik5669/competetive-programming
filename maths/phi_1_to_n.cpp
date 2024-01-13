@@ -10,3 +10,5 @@ void phi_1_to_n(int n) {
         }
     }
 }
+//same approach as seives apparently so time complexity is O(nloglogn)
+//divisor sum property summation of phi(every divisor of n)=n with this approach phi from 1 to n can be found in O(nlogn)
