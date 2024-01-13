@@ -5,3 +5,4 @@ ll add(ll a, ll b, ll c = mod){ll res=a+b;return(res>=c?res-c:res);}
 ll mod_neg(ll a, ll b, ll c = mod){ll res;if(abs(a-b)<c)res=a-b;else res=(a-b)%c;return(res<0?res+c:res);} 
 ll mul(ll a, ll b, ll c = mod){ll res=(ll)a*b;return(res>=c?res%c:res);} 
 ll mulmod(ll a,ll b, ll m = mod){ll q = (ll)(((ld)a*(ld)b)/(ld)m);ll r=a*b-q*m;if(r>m)r%=m;if(r<0)r+=m;return r;} 
+template<typename T>T binpow(T e, T n, T m = mod){T x=1,p=e;while(n){if(n&1)x=mul(x,p,m);p=mul(p,p,m);n>>=1;}return x;} 
