@@ -1,42 +1,57 @@
-#include <iostream>
- 
-int const lgmax = 20;
-int const nmax = 200000;
-int far[1 + lgmax][1 + nmax];
-int level[1 + nmax];
- 
-int getLca(int x, int y) {
-  if(level[x] < level[y])
-    std::swap(x, y);
-  for(int h = lgmax; 0 <= h; h--)
-    if(level[y] + (1 << h) <= level[x])
-      x = far[h][x];
-  if(x == y)
-    return x;
-  for(int h = lgmax; 0 <= h; h--)
-    if(far[h][x] != far[h][y]) {
-      x = far[h][x];
-      y = far[h][y];
-    }
-  return far[0][x];
-}
- 
-int main() {
-  int n, q;
-  std::cin >> n >> q;
-  for(int i = 2;i <= n; i++)
-    std::cin >> far[0][i];
- 
-  for(int h = 1; h <= lgmax; h++)
-    for(int i = 1;i <= n; i++)
-      far[h][i] = far[h - 1][far[h - 1][i]];
- 
-  for(int i = 2;i <= n; i++)
-    level[i] = level[far[0][i]] + 1;
- 
-  for(int i = 1;i <= q; i++) {
-    int x, y;
-    std::cin >> x >> y;
-    std::cout << getLca(x, y) << '\n';
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N = 3e5 + 9, LG = 18;
+
+vector<int> g[N];
+int par[N][LG + 1], dep[N], sz[N];
+void dfs(int u, int p = 0) {
+  par[u][0] = p;
+  dep[u] = dep[p] + 1;
+  sz[u] = 1;
+  for (int i = 1; i <= LG; i++) par[u][i] = par[par[u][i - 1]][i - 1];
+  for (auto v: g[u]) if (v != p) {
+    dfs(v, u);
+    sz[u] += sz[v];
   }
+}
+int lca(int u, int v) {
+  if (dep[u] < dep[v]) swap(u, v);
+  for (int k = LG; k >= 0; k--) if (dep[par[u][k]] >= dep[v]) u = par[u][k];
+  if (u == v) return u;
+  for (int k = LG; k >= 0; k--) if (par[u][k] != par[v][k]) u = par[u][k], v = par[v][k];
+  return par[u][0];
+}
+int kth(int u, int k) {
+  assert(k >= 0);
+  for (int i = 0; i <= LG; i++) if (k & (1 << i)) u = par[u][i];
+  return u;
+}
+int dist(int u, int v) {
+  int l = lca(u, v);
+  return dep[u] + dep[v] - (dep[l] << 1);
+}
+//kth node from u to v, 0th node is u
+int go(int u, int v, int k) {
+  int l = lca(u, v);
+  int d = dep[u] + dep[v] - (dep[l] << 1);
+  assert(k <= d);
+  if (dep[l] + k <= dep[u]) return kth(u, k);
+  k -= dep[u] - dep[l];
+  return kth(v, dep[v] - dep[l] - k);
+}
+int32_t main() {
+  int n; cin >> n;
+  for (int i = 1; i < n; i++) {
+    int u, v; cin >> u >> v;
+    g[u].push_back(v);
+    g[v].push_back(u);
+  }
+  dfs(1);
+  int q; cin >> q;
+  while (q--) {
+    int u, v; cin >> u >> v;
+    cout << dist(u, v) << '\n';
+  }
+  return 0;
 }
