@@ -29,6 +29,7 @@ int kth(int u, int k) {
 }
 int dist(int u, int v) {
   int l = lca(u, v);
+//finding the distance between two nodes using lca
   return dep[u] + dep[v] - (dep[l] << 1);
 }
 //kth node from u to v, 0th node is u
