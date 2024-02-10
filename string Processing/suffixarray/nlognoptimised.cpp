@@ -69,5 +69,6 @@ int main()
     }
     for(int i=0;i<n;i++)cout<<p[i]<<" ";
         cout<<endl;
+    for(int i=0;i<n;i++){cout<<s.substr(p[i])<<endl;}
     return 0;
 }
