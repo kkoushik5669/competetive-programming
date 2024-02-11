@@ -8,7 +8,7 @@
 //this code repeat three steps
 //1.first find the centroid of the currtree
 //2.find the number of paths with length k are present with a path which contain this node
-//3.now go to each subtree and find the new centroid in them (delete the current centroid you have).
+//3.now go to each subtree and find the new centroid in them repeat 1,2,3.. (delete the current centroid you have).
 const int N   = 500050;
 const int INF = 1e9+100;
 ll sol,k,ans;
