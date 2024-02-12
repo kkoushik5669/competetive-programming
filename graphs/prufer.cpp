@@ -71,7 +71,7 @@ vector < pair<int, int> > prufer_to_tree(const vector<int> & prufer_code) {
 }
 
 int32_t main() {
-    //number of spanning trees with n vertices =  n power n-2
+    //number of spanning trees with n vertices of a labelled graph=  n power n-2
     //s1 ,s2,..sk are sizes of each connected components.
     //number of ways to make the graph with k connected components connected=(prod of (s1,s2,..sk))*pow(n,k-2)
   return 0;
