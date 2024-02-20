@@ -1,4 +1,4 @@
-vector<ll>findps(vector<ll>a)
+vector<ll>findpre(vector<ll>a)
 {
     int n=a.size();
     vector<ll>pf(n);
@@ -6,7 +6,7 @@ vector<ll>findps(vector<ll>a)
     for(int i=1;i<n;i++)pf[i]=pf[i-1]+a[i];
   return pf;
 }
-vector<ll>sf(vector<ll>a)
+vector<ll>findsuf(vector<ll>a)
 {
     int n=a.size();
     vector<ll>sf(n);
