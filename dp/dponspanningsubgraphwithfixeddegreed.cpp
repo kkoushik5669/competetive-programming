@@ -41,6 +41,11 @@ vector<vector<int>>adj;
             swap(dp[src], ndp);
         }
     }
+//spanning subgraphs on trees
+//it is just picking an edge assuming the current node as the root of the tree
+//so for each edge there is a possibility of taking or not taking for each of the root.
+//which you can understand in the code. Note that the addition of all the possibilites would give you 2 power n-1
+//since each edge has a possiblity of taking or not taking and number of edges in a tree are n-1.
 main()
 {
 	//1.dont get stuck on one approach
