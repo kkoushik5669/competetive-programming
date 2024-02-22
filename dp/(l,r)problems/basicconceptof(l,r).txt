@@ -1,0 +1,8 @@
+-- (l,r) problems:- When there is decrease in the interval from left and right .
+-- You can iterate on the length starting from the base case
+-- and increment the length on the outer for loop and the right 
+-- end point will be the left end point plus the currlen on which
+-- you are iterating .Now understanding the transition state in the dp
+-- for incrementing the len of the interval .If curr interval is (i,j)
+-- Then clearly for the currans the ans must be some logic which comes
+-- from (i+1,j) or (I,j-1) which has a len-1.This the basic concept of l,r interval dp.
