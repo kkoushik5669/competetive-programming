@@ -18,3 +18,6 @@ int main() {
   cout << dp(1).val() << "\n";
 }
 //problem link:-https://atcoder.jp/contests/abc300/tasks/abc300_e
+//some insights:-
+//1.understanding the conversion of the given problem into a simple formulae 
+//
