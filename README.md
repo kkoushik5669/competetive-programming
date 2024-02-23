@@ -14,4 +14,6 @@
 10.string(c[i],codeforces[i]);
 11.cirucular problems intuition- k%n;modulo n is the main part here.
 Things to do:
-1.learning various string algorithms.
+1.Do stress testing.
+2.Do get stuck on one approach.
+3.Think and code.
