@@ -90,3 +90,5 @@ int32_t main() {
   return 0;
 }
 // https://judge.yosupo.jp/problem/matrix_product
+//some matrix mul questions:-
+//https://atcoder.jp/contests/abc293/tasks/abc293_e
