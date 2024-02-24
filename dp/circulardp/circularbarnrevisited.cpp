@@ -9,7 +9,7 @@ int main() {
 	cin >> n >> k;
 	deque<int> rooms(n);
 	for (int &r : rooms) { cin >> r; }
-
+//this same approach with building the answer from coming from the index n-1 is far more understandable for me.
 	long long min_dist = INT64_MAX;
 	// Iterate through all possible positions of the first door
 	for (int start_pos = 0; start_pos < n; start_pos++) {
