@@ -1,7 +1,11 @@
 #include <bits/stdc++.h>
 typedef long long ll;
 using namespace std;
-
+//theory:-
+//  One way to find the centroid is to pick an arbitrary root, then run a depth-first search 
+// computing the size of each subtree, and then move starting from root to the largest subtree
+// until we reach a vertex where no subtree has size greater than N/2.
+// This vertex would be the centroid of the tree.
 int n, k;
 vector<int> graph[200001];
 int subtree[200001];
