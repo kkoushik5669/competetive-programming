@@ -1,33 +1,57 @@
-#include<bits/stdc++.h>
-using namespace std;
+struct FenwickTree {
+    vector<int> bit;  // binary indexed tree
+    int n;
 
-const int N = 3e5 + 9;
+    FenwickTree(int n) {
+        this->n = n;
+        bit.assign(n, 0);
+    }
 
-template <class T>
-struct BIT { //1-indexed
-  int n; vector<T> t;
-  BIT() {}
-  BIT(int _n) {
-    n = _n; t.assign(n + 1, 0);
-  }
-  T query(int i) {
-    T ans = 0;
-    for (; i >= 1; i -= (i & -i)) ans += t[i];
-    return ans;
-  }
-  void upd(int i, T val) {
-    if (i <= 0) return;
-    for (; i <= n; i += (i & -i)) t[i] += val;
-  }
-  void upd(int l, int r, T val) {
-    upd(l, val);
-    upd(r + 1, -val);
-  }
-  T query(int l, int r) {
-    return query(r) - query(l - 1);
-  }
+    FenwickTree(vector<int> const &a) : FenwickTree(a.size()) {
+        for (size_t i = 0; i < a.size(); i++)
+            add(i, a[i]);
+    }
+
+    int sum(int r) {
+        int ret = 0;
+        for (; r >= 0; r = (r & (r + 1)) - 1)
+            ret += bit[r];
+        return ret;
+    }
+
+    int sum(int l, int r) {
+        return sum(r) - sum(l - 1);
+    }
+
+    void add(int idx, int delta) {
+        for (; idx < n; idx = idx | (idx + 1))
+            bit[idx] += delta;
+    }
 };
-int32_t main() {
+struct FenwickTreeMin {
+    vector<int> bit;
+    int n;
+    const int INF = (int)1e9;
 
-  return 0;
-}
+    FenwickTreeMin(int n) {
+        this->n = n;
+        bit.assign(n, INF);
+    }
+
+    FenwickTreeMin(vector<int> a) : FenwickTreeMin(a.size()) {
+        for (size_t i = 0; i < a.size(); i++)
+            update(i, a[i]);
+    }
+
+    int getmin(int r) {
+        int ret = INF;
+        for (; r >= 0; r = (r & (r + 1)) - 1)
+            ret = min(ret, bit[r]);
+        return ret;
+    }
+
+    void update(int idx, int val) {
+        for (; idx < n; idx = idx | (idx + 1))
+            bit[idx] = min(bit[idx], val);
+    }
+};
