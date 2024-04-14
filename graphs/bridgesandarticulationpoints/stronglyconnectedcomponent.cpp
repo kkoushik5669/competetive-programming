@@ -1,68 +1,93 @@
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 3e5 + 9;
-//What is a condensed graph?? It is formed by making a graph from different strongly connected components
-//What is the root of a condensed graph .It is the one scc which has the maximum tout
-//for each scc the one with the maximum tout is where we need to apply dfs from
-//how to optimally find the nodes for maximum tout just find the topo sort brooo
-//It can be proved that applying the dfs on a straight graph and a reverse graph would give you the same scc
-//It is optimal to apply dfs on reverse graph because it will not visit other useless scc's .
-// given a directed graph return the minimum number of edges to be added so that the whole graph  become an SCC
-bool vis[N];
-vector<int> g[N], r[N], G[N], vec; //G is the condensed graph
-void dfs1(int u) {
-  vis[u] = 1;
-  for(auto v: g[u]) if(!vis[v]) dfs1(v);
-  vec.push_back(u);
-}
-
-vector<int> comp;
-void dfs2(int u) {
-  comp.push_back(u);
-  vis[u] = 1;
-  for(auto v: r[u]) if(!vis[v]) dfs2(v);
-}
-
-int idx[N], in[N], out[N];
-int main() {
-  ios_base::sync_with_stdio(0);
-  cin.tie(0);
-
-  int n, m;
-  cin >> n >> m;
-  for(int i = 1; i <= m; i++) {
-    int u, v;
-    cin >> u >> v;
-    g[u].push_back(v);
-    r[v].push_back(u);
-  }
-  for(int i = 1; i <= n; i++) if(!vis[i]) dfs1(i);
-  reverse(vec.begin(), vec.end());
-  memset(vis, 0, sizeof vis);
-  int scc = 0;
-  for(auto u: vec) {
-    if(!vis[u]) {
-      comp.clear();
-      dfs2(u);
-      scc++;
-      for(auto x: comp) idx[x]=scc;
+#define fastio ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+struct SCC{
+	vector<std::vector<int>> G;
+	vector<std::vector<int>> G_rev;
+	int size;
+	SCC(int n):G(n),G_rev(n),size(n){}
+	int add_ver(){
+		G.push_back({});
+		G_rev.push_back({});
+		size++;
+		return size-1;
+	}
+	void add_edge(int from,int to){
+		assert(0<=to&&to<size);
+		assert(0<=from&&from<size);
+		G[from].push_back(to);
+		G_rev[to].push_back(from);
+	}
+ 
+	void dfs1(std::vector<int> &order,std::vector<int> &seen,int ind,int &now){
+		if(seen[ind]!=0) return;
+		seen[ind]=-1;
+		for(auto x:G[ind]){
+			dfs1(order,seen,x,now);
+		}
+		order[now]=ind;
+		now++;
+	}
+	void dfs2(std::vector<int> &seen,int ind,int rank){
+		if(seen[ind]!=-1) return;
+		seen[ind]=rank;
+		for(auto x:G_rev[ind]){
+			dfs2(seen,x,rank);
+		}
+	}
+	std::vector<std::vector<int>> givescc(){
+		std::vector<int> seen(size,0),order(size);
+		int now=0;
+		for(int i=0;i<size;i++) dfs1(order,seen,i,now);
+		now=0;
+		for(int i=size-1;i>=0;i--){
+			if(seen[order[i]]==-1){
+				dfs2(seen,order[i],now);
+				now++;
+			}
+		}
+		std::vector<std::vector<int>> ans(now);
+		for(int i=0;i<size;i++){
+			ans[seen[i]].push_back(i);
+		}
+		return ans;
+	}
+	std::vector<int> for_two_sat(){
+		std::vector<int> seen(size,0),order(size);
+		int now=0;
+		for(int i=0;i<size;i++) dfs1(order,seen,i,now);
+		now=0;
+		for(int i=size-1;i>=0;i--){
+			if(seen[order[i]]==-1){
+				dfs2(seen,order[i],now);
+				now++;
+			}
+		}
+		return seen;
+	}
+};
+int main()
+{
+	//1.dont get stuck on one approach
+	//2.think and code
+    fastio;
+    int t;cin>>t;
+    outer : while(t--)
+    {
+    	int n,m;cin>>n>>m;
+    	//form scc's store the edge wt's for the scc's how? size of the comp and weight of the whole scc
+    	vector<vector<int>>adj(n);
+    	vector<int>a(n);
+    	for(int i=0;i<n;i++)cin>>a[i];
+    		
+    	SCC G(n);
+    	for(int i=0;i<m;i++){
+    		int a,b;cin>>a>>b;--a;--b;
+    		G.add_edge(a,b);
+    	}
+    	vector<vector<int>>ans=G.givescc();
+    	//ans now have your scc's
+    	
     }
-  }
-  for(int u = 1; u <= n; u++) {
-    for(auto v: g[u]) {
-      if(idx[u] != idx[v]) {
-        in[idx[v]]++, out[idx[u]]++;
-        G[idx[u]].push_back(idx[v]);
-      }
-    }
-  }
-  int needed_in=0, needed_out=0;
-  for(int i = 1; i <= scc; i++) {
-    if(!in[i]) needed_in++;
-    if(!out[i]) needed_out++;
-  }
-  int ans = max(needed_in, needed_out);
-  if(scc == 1) ans = 0;
-  cout << ans << '\n';
-  return 0;
+    return 0;
 }
