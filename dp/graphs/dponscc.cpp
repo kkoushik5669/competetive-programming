@@ -75,7 +75,11 @@ int main()
     outer : while(t--)
     {
     	int n,m;cin>>n>>m;
-    	//form scc's store the edge wt's for the scc's how? size of the comp and weight of the whole scc
+    	//why even use scc?
+	//you easily know how to apply dp using topo order in a graph which donot have cycles
+	//there might be cycle's in the given directed graph so you cannot apply dp on the cyclic graph
+	//so using scc decomposes the given graph into DAG
+	//but how does the total wt and size of component's change is to your observations.
     	vector<vector<int>>adj(n);
     	vector<int>a(n);
     	for(int i=0;i<n;i++)cin>>a[i];
@@ -90,6 +94,7 @@ int main()
     	int x=ans.size();
     	map<int,int>belong;
     	vector<vector<int>>newgraph(x+1);map<int,int>indegree;
+	    //cc stores the total size of the current scc and wt has the total wt of the current scc
     	for(int i=0;i<ans.size();i++){
     		for(auto j:ans[i]){
     			belong[j]=i;cc[i]++;wt[i]+=a[j];
@@ -104,6 +109,7 @@ int main()
     			}
     		}
     	}
+	    //new graph is the condensed graph
     	for(int i=0;i<ans.size();i++){
     		if(indegree[i]==0){newgraph[x].push_back(i);indegree[i]++;}
     	}
@@ -111,6 +117,7 @@ int main()
     	q.push(x);
     	vector<pair<int,long long>>dp(x+1,{0,LLONG_MAX});
     	dp[x]={0,0};
+	    //we are now using the topo order to apply dp on the scc (note that the scc is always directed acyclic)
     	while(q.size()){
     		int ff=q.front();q.pop();
     		for(auto i:newgraph[ff]){
