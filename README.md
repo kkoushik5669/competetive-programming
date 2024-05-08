@@ -7,8 +7,7 @@
     vec.erase(it,it2);
 4.using dsu to find if a graph has cycle in it.
 5.use 1ll<<34 instead of 1<<34.
-6.partial_sum(a,a+5,b)
-7.partial_sum(a,a+5,b,myfun);
+6.if each node has exactly one outgoing directed edge .There is exactly one cycle in the given graph.
 8.__lg(n) .
 9.maximum prime gap donot excced 300.
 10.string(c[i],codeforces[i]);
