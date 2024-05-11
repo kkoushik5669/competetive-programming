@@ -29,5 +29,5 @@ struct Modint {
     friend bool operator==(Modint a, Modint b) {return a.x == b.x;}
     friend bool operator!=(Modint a, Modint b) {return !(a == b);}
 };
-const mod = 998244353;
+const int mod = 998244353;
 typedef Modint<mod> mint;
