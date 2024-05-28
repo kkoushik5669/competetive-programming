@@ -27,6 +27,7 @@ struct FenwickTree {
         for (; idx < n; idx = idx | (idx + 1))
             bit[idx] += delta;
     }
+//for range updates add(l,1) and add(r+1,-1) to get a +1 sum in the range of l to r
 };
 struct FenwickTreeMin {
     vector<int> bit;
