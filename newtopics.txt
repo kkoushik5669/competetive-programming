@@ -1,0 +1,5 @@
+//jacobian two square theorem
+//pick's theorem
+//xor hashing
+//eularian path
+//
