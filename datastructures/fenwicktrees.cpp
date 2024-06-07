@@ -1,53 +1,64 @@
 struct FenwickTree {
-    vector<int> bit;  // binary indexed tree
+    vector<ll> bit;  // binary indexed tree
     int n;
+
     FenwickTree(int n) {
         this->n = n;
-        bit.assign(n, 0);
-    }
-    FenwickTree(vector<int> const &a) : FenwickTree(a.size()) {
-        for (size_t i = 0; i < a.size(); i++)
-            add(i, a[i]);
-    }
-    int sum(int r) {
-        int ret = 0;
-        for (; r >= 0; r = (r & (r + 1)) - 1)
-            ret += bit[r];
-        return ret;
-    }
-    int sum(int l, int r) {
-        return sum(r) - sum(l - 1);
-    }
-    void add(int idx, int delta) {
-        for (; idx < n; idx = idx | (idx + 1))
-            bit[idx] += delta;
-    }
-//for range updates add(l,1) and add(r+1,-1) to get a +1 sum in the range of l to r
-};
-struct FenwickTreeMin {
-    vector<int> bit;
-    int n;
-    const int INF = (int)1e9;
-
-    FenwickTreeMin(int n) {
-        this->n = n;
-        bit.assign(n, INF);
+        bit.assign(n, (ll)0);
     }
 
-    FenwickTreeMin(vector<int> a) : FenwickTreeMin(a.size()) {
+    FenwickTree(vector<ll> const &a) : FenwickTree(a.size()) {
         for (size_t i = 0; i < a.size(); i++)
             update(i, a[i]);
     }
+    void update(int p, ll x) {
+        for (; p <= n; p |= (p + 1)) {
+            bit[p] += x;
+        }
+    }
+    ll get(int p) {
+        ll ret = 0;
 
-    int getmin(int r) {
-        int ret = INF;
-        for (; r >= 0; r = (r & (r + 1)) - 1)
-            ret = min(ret, bit[r]);
+        for (; p > 0; --p) {
+            ret += bit[p];
+            p &= (p + 1);
+        }
+
         return ret;
     }
 
-    void update(int idx, int val) {
-        for (; idx < n; idx = idx | (idx + 1))
-            bit[idx] = min(bit[idx], val);
+    ll get(int l, int r) {
+        return get(r) - get(l - 1);
+    }
+};
+struct FenwickTree2D {
+    vector<vector<int>> bit;
+    int n, m;
+    FenwickTree2D(int n,int m){
+    	this->n=n;
+    	this->m=m;bit.assign(n,{});
+    	for(int i=0;i<n;i++){bit[i].resize(m);}
+    }
+    // init(...) { ... }
+	FenwickTree2D(vector<vector<int>> &a) : FenwickTree2D(a.size(),a[0].size()) {
+        for (size_t i = 0; i < a.size(); i++)
+          {
+          	for(size_t j=0;j<a[i].size();j++){
+          		add(i,j,a[i][j]);
+          	}
+          }
+    }
+    int sum(int x, int y) {
+        int ret = 0;
+        for (int i = x; i >= 0; i = (i & (i + 1)) - 1)
+            for (int j = y; j >= 0; j = (j & (j + 1)) - 1)
+                ret += bit[i][j];
+        return ret;
+    }
+
+    void add(int x, int y, int delta) {
+        for (int i = x; i < n; i = i | (i + 1))
+            for (int j = y; j < m; j = j | (j + 1))
+                bit[i][j] += delta;
     }
 };
