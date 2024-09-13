@@ -78,6 +78,7 @@ public:
 int main() {
   //in this algo we form a level graph by considering only the edges which have a remaining capacity greater than zero .
   //Once we form a level graph we use dfs to find the total maxflow.
+    //the overall complexity of this algorithm is O(v^2 *e)
   int n, m;
   cin >> n >> m;
   Dinic F(n + 1);
