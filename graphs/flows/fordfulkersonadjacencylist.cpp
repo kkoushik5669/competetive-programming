@@ -171,5 +171,6 @@ void exampleFromSlides() {
 
 int main() {
     exampleFromSlides();
+    //overall complexity of this algorithm is o(maxflow*number of edges)
     return 0;
 }
