@@ -53,6 +53,8 @@ int main()
 {
     //1.dont get stuck on one approach
     //2.think and code
+    //edmond karp is just like ford fulkerson but by using bfs we are mostly considering the shortest augumented paths first
+    //the overall complexity is o(v+E)*(vE)=o(v*E^2)
     fastio;
     cin>>n;
     int m;cin>>m;
